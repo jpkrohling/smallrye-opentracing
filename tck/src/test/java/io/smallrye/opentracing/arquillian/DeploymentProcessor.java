@@ -4,9 +4,6 @@ import io.opentracing.contrib.tracerresolver.TracerResolver;
 import io.opentracing.mock.MockTracer;
 import io.smallrye.opentracing.ExceptionMapper;
 import io.smallrye.opentracing.MockTracerResolver;
-import io.smallrye.opentracing.ResteasyClientTracingRegistrarProvider;
-import org.eclipse.microprofile.opentracing.ClientTracingRegistrar;
-import org.eclipse.microprofile.opentracing.ClientTracingRegistrarProvider;
 import org.jboss.arquillian.container.test.spi.client.deployment.ApplicationArchiveProcessor;
 import org.jboss.arquillian.test.spi.TestClass;
 import org.jboss.shrinkwrap.api.Archive;
@@ -28,11 +25,6 @@ public class DeploymentProcessor implements ApplicationArchiveProcessor {
 
       extensionsJar.addClass(ExceptionMapper.class);
       extensionsJar.addAsServiceProvider(Providers.class, ExceptionMapper.class);
-
-      extensionsJar.addClass(ResteasyClientTracingRegistrarProvider.class);
-      extensionsJar.addClass(ClientTracingRegistrarProvider.class);
-      extensionsJar.addClass(ClientTracingRegistrar.class);
-      extensionsJar.addAsServiceProvider(ClientTracingRegistrarProvider.class, ResteasyClientTracingRegistrarProvider.class);
 
       extensionsJar.addClasses(MockTracerResolver.class);
       extensionsJar.addPackage(MockTracer.class.getPackage());
